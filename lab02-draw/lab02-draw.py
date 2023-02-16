@@ -16,9 +16,18 @@ arcade.draw_lrtb_rectangle_filled(0, 800, 100, 0, arcade.color.BANGLADESH_GREEN)
 
 # Draw the stripes of the "crust".
 arcade.draw_lrtb_rectangle_filled(10, 55, 100, 0, arcade.color.DARK_JUNGLE_GREEN)
-arcade.draw_lrtb_rectangle_filled(15, 55, 100, 0, arcade.color.DARK_JUNGLE_GREEN)
 arcade.draw_lrtb_rectangle_filled(5, 35, 100, 30, arcade.color.DARK_JUNGLE_GREEN)
-
+arcade.draw_rectangle_filled(100, 50, 25, 100, arcade.color.DARK_JUNGLE_GREEN)
+arcade.draw_rectangle_filled(160, 0, 45, 80, arcade.color.DARK_JUNGLE_GREEN)
+arcade.draw_rectangle_filled(178, 50, 49, 100, arcade.color.DARK_JUNGLE_GREEN)
+arcade.draw_rectangle_filled(730, 32, 15, 100, arcade.color.DARK_JUNGLE_GREEN)
+arcade.draw_rectangle_filled(705, 50, 35, 100, arcade.color.DARK_JUNGLE_GREEN)
+arcade.draw_rectangle_filled(303, 37, 65, 80, arcade.color.DARK_JUNGLE_GREEN)
+arcade.draw_rectangle_filled(306, 45, 34, 100, arcade.color.DARK_JUNGLE_GREEN)
+arcade.draw_rectangle_filled(310, 50, 28, 100, arcade.color.DARK_JUNGLE_GREEN)
+#
+arcade.draw_rectangle_filled(730, 35, 15, 100, arcade.color.DARK_JUNGLE_GREEN)
+arcade.draw_rectangle_filled(730, 35, 15, 100, arcade.color.DARK_JUNGLE_GREEN)
 
 # Finish the drawing.
 arcade.finish_render()
