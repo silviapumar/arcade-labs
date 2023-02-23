@@ -9,13 +9,25 @@ def main():
     arcade.set_background_color(arcade.color.BLUE)
     arcade.start_render()
 
+    arcade.schedule(on_draw, 1/60)
+    arcade.run()
+
+
+def on_draw(delta_time):
     draw_sand()
     draw_fish(0, 0)
-    draw_fish(210, 80)
+    draw_fish(210, 90)
     draw_fish(20, 315)
-
-    arcade.finish_render()
-    arcade.run()
+    draw_fish(-250, 195)
+    draw_fish(360, 265)
+    draw_bubbles(-75, 20)
+    draw_bubbles(-30, -60)
+    draw_bubbles(400, 230)
+    draw_bubbles(510, 100)
+    draw_bubbles(370, 90)
+    draw_bubbles(52, 65)
+    draw_bubbles(-120, 219)
+    draw_bubbles(560, -90)
 
 
 def draw_sand():
@@ -33,8 +45,9 @@ def draw_fish(x, y):
     arcade.draw_circle_filled(325 + x, 205 + y, 5, arcade.color.TAUPE)
 
 
-# def draw_coral():
-
+def draw_bubbles(x, y):
+    arcade.draw_circle_outline(190 + x, 300 + y, 10, arcade.color.AIR_SUPERIORITY_BLUE, 2, 0, -1)
+    arcade.draw_circle_filled(191 + x, 301 + y, 7, arcade.color.AIR_SUPERIORITY_BLUE)
 
 
 main()
