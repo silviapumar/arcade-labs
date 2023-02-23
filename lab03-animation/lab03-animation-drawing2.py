@@ -28,6 +28,7 @@ def on_draw(delta_time):
     draw_bubbles(52, 65)
     draw_bubbles(-120, 219)
     draw_bubbles(560, -90)
+    draw_sea_star()
 
 
 def draw_sand():
@@ -48,6 +49,11 @@ def draw_fish(x, y):
 def draw_bubbles(x, y):
     arcade.draw_circle_outline(190 + x, 300 + y, 10, arcade.color.AIR_SUPERIORITY_BLUE, 2, 0, -1)
     arcade.draw_circle_filled(191 + x, 301 + y, 7, arcade.color.AIR_SUPERIORITY_BLUE)
+
+
+def draw_sea_star():
+    # Not finished.
+    arcade.draw_triangle_filled(420, 110, 450, 55, 480, 110, arcade.color.ALLOY_ORANGE)
 
 
 main()
