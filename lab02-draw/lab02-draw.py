@@ -1,7 +1,7 @@
 import arcade
 
 # Open up a window.
-arcade.open_window(800, 600, "Rest at Dawn.")
+arcade.open_window(800, 600, "The Watermelon.")
 
 # Set background color.
 arcade.set_background_color(arcade.color.AMARANTH)
