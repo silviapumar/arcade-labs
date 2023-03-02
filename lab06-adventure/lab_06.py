@@ -44,6 +44,7 @@ def main():
                 print("You can't go that way.")
             else:
                 print(next_room.description)
+        # not finished
 
 
 main()
