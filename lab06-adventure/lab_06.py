@@ -22,8 +22,8 @@ def main():
     room_list.append(room)
     room = Room("It's pitch black in the room. You can't see a thing but you hear a cracking sound coming from this room.", None, 1, 3, None)
     room_list.append(room)
+    print(room_list[0])
     current_room = 0
-    # print(room_list[0])
     current_room = room_list[0].description
     done = False
     while not done:
@@ -33,6 +33,10 @@ def main():
         next_action = action
         if next_action.lower() == "N":
             next_room = room_list[current_room].north
+            if next_room is None:
+                print("You can't go that way.")
+            else:
+                print(next_room.description)
 
 
 main()
