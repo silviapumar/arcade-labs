@@ -41,7 +41,6 @@ class SeaStar:
 class MyGame(arcade.Window):
 
     def __init__(self):
-        """ Initializer """
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, " Lab 7 - User Control ")
 
         self.set_mouse_visible(False)
