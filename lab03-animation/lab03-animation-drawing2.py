@@ -51,9 +51,9 @@ def draw_bubbles(x, y):
     arcade.draw_circle_filled(191 + x, 301 + y, 7, arcade.color.AIR_SUPERIORITY_BLUE)
 
 
-def draw_sea_star():
+# def draw_sea_star():
     # Not finished.
-    arcade.draw_triangle_filled(420, 110, 450, 55, 480, 110, arcade.color.ALLOY_ORANGE)
+    # arcade.draw_triangle_filled(420, 110, 450, 55, 480, 110, arcade.color.ALLOY_ORANGE)
 
 
 main()
