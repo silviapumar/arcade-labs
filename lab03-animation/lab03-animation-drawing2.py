@@ -28,7 +28,7 @@ def on_draw(delta_time):
     draw_bubbles(52, 65)
     draw_bubbles(-120, 219)
     draw_bubbles(560, -90)
-    draw_sea_star()
+    # draw_sea_star()
 
 
 def draw_sand():
