@@ -39,7 +39,6 @@ class SeaStar:
 
 
 class MyGame(arcade.Window):
-    """ Our Custom Window Class """
 
     def __init__(self):
         """ Initializer """
