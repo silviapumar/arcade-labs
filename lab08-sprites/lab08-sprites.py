@@ -36,7 +36,7 @@ class MyGame(arcade.Window):
 
         self.score = 0
 
-        # All of the sprites are from kenney.nl
+        # All the sprites are from kenney.nl
         self.player_sprite = arcade.Sprite("alien.png", SPRITE_SCALING_ALIEN)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
