@@ -116,9 +116,6 @@ class MyGame(arcade.Window):
             self.score -= 1
             arcade.play_sound(self.meteor_sound)
 
-        # if len(self.planet_list) == 0:
-        #    self.meteor_list.pause
-
 
 def main():
     """ Main method """
