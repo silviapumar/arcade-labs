@@ -90,6 +90,7 @@ class MyGame(arcade.Window):
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
 
         if len(self.planet_list) == 0:
+            arcade.set_background_color(arcade.color.BLACK)
             arcade.draw_text("GAME OVER", 500, 350, arcade.color.RED, 40)
             arcade.draw_text(output, 500, 295, arcade.color.WHITE, 14)
 
@@ -114,6 +115,9 @@ class MyGame(arcade.Window):
             meteor.remove_from_sprite_lists()
             self.score -= 1
             arcade.play_sound(self.meteor_sound)
+
+        # if len(self.planet_list) == 0:
+        #    self.meteor_list.pause
 
 
 def main():
