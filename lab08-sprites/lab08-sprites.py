@@ -6,12 +6,28 @@ import arcade
 # --- Constants ---
 SPRITE_SCALING_ALIEN = 0.5
 SPRITE_SCALING_PLANET = 0.05
-SPRITE_SCALING_METEOR = 0.6
-PLANET_COUNT = 70
-METEOR_COUNT = 50
+SPRITE_SCALING_METEOR = 0.5
+PLANET_COUNT = 60
+METEOR_COUNT = 65
 
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 650
+
+
+class Planet(arcade.Sprite):
+    def update(self):
+        self.center_x -= 1
+
+        if self.center_x < -20:
+            self.center_x = SCREEN_WIDTH + 20
+
+
+class Meteor(arcade.Sprite):
+    def update(self):
+        self.center_y -= 1
+
+        if self.center_y < -20:
+            self.center_y = SCREEN_HEIGHT + 20
 
 
 class MyGame(arcade.Window):
@@ -48,14 +64,14 @@ class MyGame(arcade.Window):
 
         for i in range(PLANET_COUNT):
             # All the sprites are from kenney.nl
-            planet = arcade.Sprite(":resources:planet.png", SPRITE_SCALING_PLANET)
+            planet = Planet(":resources:planet.png", SPRITE_SCALING_PLANET)
             planet.center_x = random.randrange(SCREEN_WIDTH)
             planet.center_y = random.randrange(SCREEN_HEIGHT)
             self.planet_list.append(planet)
 
         for i in range(METEOR_COUNT):
             # All the sprites are from kenney.nl
-            meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
+            meteor = Meteor(":resources:meteor.png", SPRITE_SCALING_METEOR)
             meteor.center_x = random.randrange(SCREEN_WIDTH)
             meteor.center_y = random.randrange(SCREEN_HEIGHT)
             self.meteor_list.append(meteor)
@@ -79,15 +95,15 @@ class MyGame(arcade.Window):
         self.planet_list.update()
         self.meteor_list.update()
         planet_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.planet_list)
-        # meteor_hit_list = arcade.check_for_collision_with_list(self.player_list, self.meteor_list)
+        meteor_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.meteor_list)
 
         for planet in planet_hit_list:
             planet.remove_from_sprite_lists()
             self.score += 1
 
-        # for meteor in meteor_hit_list:
-        #    meteor.remove_from_sprite_lists()
-        #    self.score -= 1
+        for meteor in meteor_hit_list:
+            meteor.remove_from_sprite_lists()
+            self.score -= 1
 
 
 def main():
