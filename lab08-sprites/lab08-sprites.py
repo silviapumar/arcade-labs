@@ -47,6 +47,10 @@ class MyGame(arcade.Window):
 
         arcade.set_background_color(arcade.color.SPACE_CADET)
 
+        # All sounds are from mixkit.co
+        self.planet_sound = arcade.load_sound(":resources:planet2.wav")
+        self.meteor_sound = arcade.load_sound(":resources:get_hit.wav")
+
     def setup(self):
         """ Set up the game and initialize the variables. """
 
@@ -85,6 +89,10 @@ class MyGame(arcade.Window):
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
 
+        if len(self.planet_list) == 0:
+            arcade.draw_text("GAME OVER", 500, 350, arcade.color.RED, 40)
+            arcade.draw_text(output, 500, 295, arcade.color.WHITE, 14)
+
     def on_mouse_motion(self, x, y, dx, dy):
         """ Handle Mouse Motion """
         self.player_sprite.center_x = x
@@ -100,10 +108,12 @@ class MyGame(arcade.Window):
         for planet in planet_hit_list:
             planet.remove_from_sprite_lists()
             self.score += 1
+            arcade.play_sound(self.planet_sound)
 
         for meteor in meteor_hit_list:
             meteor.remove_from_sprite_lists()
             self.score -= 1
+            arcade.play_sound(self.meteor_sound)
 
 
 def main():
