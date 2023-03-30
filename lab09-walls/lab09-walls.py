@@ -1,6 +1,8 @@
 """ Sprite Sample Program """
 
+# import random
 import arcade
+from pyglet.math import Vec2
 
 # --- Constants ---
 SPRITE_SCALING_METEOR = 0.6
@@ -11,22 +13,32 @@ SCREEN_HEIGHT = 600
 
 MOVEMENT_SPEED = 5
 
+CAMERA_SPEED = 1
+VIEWPORT_MARGIN = 220
+
 
 class MyGame(arcade.Window):
     """ This class represents the main window of the game. """
 
     def __init__(self):
         """ Initializer """
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Sprites With Walls Example")
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "The Conqueror of Planets. Pt.2")
 
         self.player_list = None
         self.meteor_list = None
+        self.score = 0
 
         self.player_sprite = None
 
         self.physics_engine = None
 
-        self.physics_engine = None
+        self.left_pressed = False
+        self.right_pressed = False
+        self.up_pressed = False
+        self.down_pressed = False
+
+        self.camera_for_sprites = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.camera_for_gui = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
 
     def setup(self):
         arcade.set_background_color(arcade.color.SPACE_CADET)
@@ -41,40 +53,50 @@ class MyGame(arcade.Window):
         self.player_sprite.center_y = 64
         self.player_list.append(self.player_sprite)
 
-        meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
-        meteor.center_x = 300
-        meteor.center_y = 200
-        self.meteor_list.append(meteor)
-
-        meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
-        meteor.center_x = 364
-        meteor.center_y = 200
-        self.meteor_list.append(meteor)
-
         for x in range(173, 650, 64):
             meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
             meteor.center_x = x
             meteor.center_y = 350
             self.meteor_list.append(meteor)
 
-        coordinate_list = [[400, 500], [470, 500], [400, 570], [470, 570]]
-
-        for coordinate in coordinate_list:
-            meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
-            meteor.center_x = coordinate[0]
-            meteor.center_y = coordinate[1]
-            self.meteor_list.append(meteor)
-
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.meteor_list)
 
     def on_draw(self):
+        self.clear()
+
         arcade.start_render()
+
+        self.camera_for_sprites.use()
 
         self.meteor_list.draw()
         self.player_list.draw()
 
-    def update(self, delta_time):
+        self.camera_for_gui.use()
+
+        # arcade.draw_rectangle_filled(self.width // 2, 20, self.width, 40, arcade.color.ALMOND)
+        # text = f"Scroll value: ({self.camera_for_sprites.position[0]:5.1f}, " \
+        #       f"{self.camera_for_sprites.position[1]:5.1f})"
+        # arcade.draw_text(text, 10, 10, arcade.color.BLACK_BEAN, 20)
+
+        arcade.draw_text(f"Score: {self.score}", 10, 15, arcade.color.WHITE, 14)
+
+    def on_update(self, delta_time):
         self.physics_engine.update()
+
+        self.scroll_to_player()
+
+        lower_left_corner = (self.player_sprite.center_x - self.width / 2,
+                             self.player_sprite.center_y - self.height / 2)
+        self.camera_for_sprites.move_to(lower_left_corner, CAMERA_SPEED)
+
+    def scroll_to_player(self):
+        position = Vec2(self.player_sprite.center_x - self.width / 2,
+                        self.player_sprite.center_y - self.height / 2)
+        self.camera_for_sprites.move_to(position, CAMERA_SPEED)
+
+    def on_resize(self, width, height):
+        self.camera_for_sprites.resize(int(width), int(height))
+        self.camera_for_gui.resize(int(width), int(height))
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
@@ -105,4 +127,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
