@@ -3,7 +3,7 @@
 import arcade
 
 # --- Constants ---
-SPRITE_SCALING_METEOR = 0.5
+SPRITE_SCALING_METEOR = 0.6
 SPRITE_SCALING_ALIEN = 0.5
 
 SCREEN_WIDTH = 800
@@ -32,8 +32,29 @@ class MyGame(arcade.Window):
         self.player_list = arcade.SpriteList()
         self.meteor_list = arcade.SpriteList()
 
+        self.score = 0
+
+        # Create the player
+        self.player_sprite = arcade.Sprite(":resources:alien.png", SPRITE_SCALING_ALIEN)
+        self.player_sprite.center_x = 50
+        self.player_sprite.center_y = 64
+        self.player_list.append(self.player_sprite)
+
+        meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
+        meteor.center_x = 300
+        meteor.center_y = 200
+        self.meteor_list.append(meteor)
+
+        meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
+        meteor.center_x = 364
+        meteor.center_y = 200
+        self.meteor_list.append(meteor)
+
     def on_draw(self):
         arcade.start_render()
+
+        self.meteor_list.draw()
+        self.player_list.draw()
 
 
 def main():
