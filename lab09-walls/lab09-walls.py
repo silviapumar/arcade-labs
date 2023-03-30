@@ -53,10 +53,34 @@ class MyGame(arcade.Window):
         self.player_sprite.center_y = 64
         self.player_list.append(self.player_sprite)
 
+        # Meteors
+        meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
+        meteor.center_x = 300
+        meteor.center_y = 200
+        self.meteor_list.append(meteor)
+
+        meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
+        meteor.center_x = 364
+        meteor.center_y = 200
+        self.meteor_list.append(meteor)
+
         for x in range(173, 650, 64):
             meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
             meteor.center_x = x
             meteor.center_y = 350
+            self.meteor_list.append(meteor)
+
+        for y in range(173, 650, 64):
+            meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
+            meteor.center_x = 780
+            meteor.center_y = y
+            self.meteor_list.append(meteor)
+
+        coordinate_list = [[400, 500], [462, 500], [400, 555], [462, 555]]
+        for coordinate in coordinate_list:
+            meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
+            meteor.center_x = coordinate[0]
+            meteor.center_y = coordinate[1]
             self.meteor_list.append(meteor)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.meteor_list)
