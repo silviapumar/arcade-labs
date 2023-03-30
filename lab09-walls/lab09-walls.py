@@ -58,12 +58,14 @@ class MyGame(arcade.Window):
 
         self.score = 0
 
+        # All the sprites are from kenney.nl
         self.player_sprite = arcade.Sprite(":resources:alien.png", SPRITE_SCALING_ALIEN)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 64
         self.player_list.append(self.player_sprite)
 
         # Meteors
+        # All the sprites are from kenney.nl
         meteor = arcade.Sprite(":resources:meteor.png", SPRITE_SCALING_METEOR)
         meteor.center_x = 300
         meteor.center_y = 200
@@ -94,6 +96,7 @@ class MyGame(arcade.Window):
             self.meteor_list.append(meteor)
 
         # Planets
+        # All the sprites are from kenney.nl
         for i in range(PLANET_COUNT):
             planet = arcade.Sprite(":resources:planet.png", SPRITE_SCALING_PLANET)
             planet_placed_successfully = False
