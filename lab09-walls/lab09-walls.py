@@ -58,6 +58,9 @@ class MyGame(arcade.Window):
 
         self.score = 0
 
+        # The sounds are from mixkit.co
+        self.planet_sound = arcade.load_sound(":resources:planet2.wav")
+
         # All the sprites are from kenney.nl
         self.player_sprite = arcade.Sprite(":resources:alien.png", SPRITE_SCALING_ALIEN)
         self.player_sprite.center_x = 50
@@ -125,14 +128,9 @@ class MyGame(arcade.Window):
 
         self.camera_for_gui.use()
 
-        # arcade.draw_rectangle_filled(self.width // 2, 20, self.width, 40, arcade.color.ALMOND)
-        # text = f"Scroll value: ({self.camera_for_sprites.position[0]:5.1f}, " \
-        #       f"{self.camera_for_sprites.position[1]:5.1f})"
-        # arcade.draw_text(text, 10, 10, arcade.color.BLACK_BEAN, 20)
-
         arcade.draw_text(f"Score: {self.score}", 10, 15, arcade.color.WHITE, 14)
 
-    def on_update(self, delta_time):
+    def update(self, delta_time):
         self.physics_engine.update()
 
         self.scroll_to_player()
@@ -140,6 +138,13 @@ class MyGame(arcade.Window):
         lower_left_corner = (self.player_sprite.center_x - self.width / 2,
                              self.player_sprite.center_y - self.height / 2)
         self.camera_for_sprites.move_to(lower_left_corner, CAMERA_SPEED)
+
+        planet_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.planet_list)
+
+        for planet in planet_hit_list:
+            planet.remove_from_sprite_lists()
+            self.score += 1
+            arcade.play_sound(self.planet_sound)
 
     def scroll_to_player(self):
         position = Vec2(self.player_sprite.center_x - self.width / 2,
