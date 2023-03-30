@@ -1,15 +1,20 @@
 """ Sprite Sample Program """
+import random
 
 # import random
 import arcade
 from pyglet.math import Vec2
+import os
 
 # --- Constants ---
 SPRITE_SCALING_METEOR = 0.6
 SPRITE_SCALING_ALIEN = 0.5
+SPRITE_SCALING_PLANET = 0.03
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+PLANET_COUNT = 30
+
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 650
 
 MOVEMENT_SPEED = 5
 
@@ -24,8 +29,12 @@ class MyGame(arcade.Window):
         """ Initializer """
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "The Conqueror of Planets. Pt.2")
 
+        file_path = os.path.dirname(os.path.abspath(__file__))
+        os.chdir(file_path)
+
         self.player_list = None
         self.meteor_list = None
+        self.planet_list = None
         self.score = 0
 
         self.player_sprite = None
@@ -45,6 +54,7 @@ class MyGame(arcade.Window):
 
         self.player_list = arcade.SpriteList()
         self.meteor_list = arcade.SpriteList()
+        self.planet_list = arcade.SpriteList()
 
         self.score = 0
 
@@ -83,6 +93,20 @@ class MyGame(arcade.Window):
             meteor.center_y = coordinate[1]
             self.meteor_list.append(meteor)
 
+        # Planets
+        for i in range(PLANET_COUNT):
+            planet = arcade.Sprite(":resources:planet.png", SPRITE_SCALING_PLANET)
+            planet_placed_successfully = False
+            while not planet_placed_successfully:
+                planet.center_x = random.randrange(SCREEN_WIDTH)
+                planet.center_y = random.randrange(SCREEN_HEIGHT)
+                meteor_hit_list = arcade.check_for_collision_with_list(meteor, self.meteor_list)
+                planet_hit_list = arcade.check_for_collision_with_list(planet, self.planet_list)
+                if len(meteor_hit_list) == 0 and len(planet_hit_list) == 0:
+                    planet_placed_successfully = True
+
+            self.planet_list.append(planet)
+
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.meteor_list)
 
     def on_draw(self):
@@ -94,6 +118,7 @@ class MyGame(arcade.Window):
 
         self.meteor_list.draw()
         self.player_list.draw()
+        self.planet_list.draw()
 
         self.camera_for_gui.use()
 
