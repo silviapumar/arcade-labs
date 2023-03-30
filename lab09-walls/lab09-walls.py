@@ -73,6 +73,9 @@ class MyGame(arcade.Window):
         self.meteor_list.draw()
         self.player_list.draw()
 
+    def update(self, delta_time):
+        self.physics_engine.update()
+
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
 
